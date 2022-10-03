@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ostap@gmail.com
+      changes:
+        - dropColumn:
+            columnName: role
+            tableName: account
+        - addColumn:
+            tableName: account
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: active
+                  type: VARCHAR(5)
+  - changeSet:
+      id: 2
+      author: ostap@gmail.com
+      changes:
+        - createIndex:
+            tableName: account
+            indexName: idx_active_lasdlahsfhllweifi
+            columns:
+              - column:
+                  name: active

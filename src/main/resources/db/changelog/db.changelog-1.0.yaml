@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ostap.ja@gmail.com
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: account_pkey
+                  name: id
+                  type: bigint
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: role
+                  type: VARCHAR(255)
+  - changeSet:
+      id: 2
+      author: ostap.ja@gmail.com
+      changes:
+        - createTable:
+            tableName: account_details
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fist_name
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(40)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 3
+      author: ostap.ja@gmail.com
+      changes:
+        - addPrimaryKey:
+            columnNames: id
+            constraintName: account_details_pkey
+            tableName: account_details
+  - changeSet:
+      id: 4
+      author: ostap.ja@gmail.com
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: uk_email_raflasdljkfljasjljshgdfgh
+            tableName: account
+  - changeSet:
+      id: 5
+      author: ostap.ja@gmail.com
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: password
+            indexName: idx_password
+            tableName: account
+  - changeSet:
+      id: 6
+      author: ostap.ja@gmail.com
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id
+            baseTableName: account
+            constraintName: fk_account_account_details
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: account_details
