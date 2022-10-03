@@ -1,9 +1,4 @@
 spring:
-  application:
-    name: cyber-done-device-microservice
-    version: @version@
-  profiles:
-    active: dev
   datasource:
     username: postgres
     password: ${CDDS_DB_PASSWORD}
@@ -13,3 +8,5 @@ spring:
       hibernate:
         ddl-auto: validate
       show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
